@@ -1,19 +1,30 @@
 version: "4.28.0"
+
 services:
 
   java_app:
     container_name: java_mdbapp
-    image: crud-mdb:1.0
+    image: crudmdb-java:1.0
     build: .
     ports:
       - 8080:8080
     depends_on:
       - java_db
+    environment:
+      NAME_CONTAINER_DB: java_mdb
+      MYSQL_DATABASE: mariadb01
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: contrasena
   java_db:
     container_name: java_mdb
     image: mariadb:latest
     ports:
-      - 3306:3306
+      - 3308:3306
     environment:
-      MYSQL_ROOT_PASSWORD: contrasena
+      NAME_CONTAINER_DB: java_db
       MYSQL_DATABASE: mariadb01
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: contrasena
+
+
+
